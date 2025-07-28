@@ -39,12 +39,12 @@ WORKDIR /code
 
 EXPOSE 3008 3009
 
-COPY package*.json ./
+COPY package*.json /app
 
-RUN npm install
+RUN cd /app && npm install
 
-COPY . .
+COPY . /app
 
-RUN npm run build
+RUN cd /app && npm run build
 
-CMD ["npm", "run", "server"]
+CMD ["cd", "/app", "&&", "npm", "run", "server"]
