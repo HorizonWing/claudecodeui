@@ -1,9 +1,13 @@
 FROM ubuntu:24.04
 
 ENV DEBIAN_FRONTEND=noninteractive
-ENV ANTHROPIC_AUTH_TOKEN=sk-134
+ARG ANTHROPIC_AUTH_TOKEN
+ENV ANTHROPIC_AUTH_TOKEN=${ANTHROPIC_AUTH_TOKEN}
 
 RUN apt-get update && apt-get install -y \
+    git \
+    vim \
+    gh \
     curl \
     ca-certificates \
     gnupg \
@@ -15,7 +19,7 @@ RUN apt-get update && apt-get install -y \
 RUN curl -fsSL https://deb.nodesource.com/setup_lts.x | bash - \
     && apt-get install -y nodejs
 
-RUN npm install -g @anthropic-ai/claude-code
+RUN npm install -g @anthropic-ai/claude-code && npm install -g pnpm
 
 RUN npm config set registry https://registry.npmmirror.com && \
     npm config set fetch-retry-mintimeout 20000 && \
