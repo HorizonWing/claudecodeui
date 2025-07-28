@@ -17,6 +17,10 @@ RUN curl -fsSL https://deb.nodesource.com/setup_lts.x | bash - \
 
 RUN npm install -g @anthropic-ai/claude-code
 
+RUN npm config set registry https://registry.npmmirror.com && \
+    npm config set timeout 60000 && \
+    npm config set network-timeout 60000
+
 RUN mkdir -p ~/.claude && echo '{\
   "env": {\
     "ANTHROPIC_AUTH_TOKEN": "'$ANTHROPIC_AUTH_TOKEN'",\
