@@ -35,16 +35,16 @@ RUN mkdir -p ~/.claude && echo '{\
   }\
 }' > ~/.claude/settings.json
 
-WORKDIR /code
+WORKDIR /app
 
 EXPOSE 3008 3009
 
-COPY package*.json /app
+COPY package*.json ./
 
-RUN cd /app && npm install
+RUN npm install
 
-COPY . /app
+COPY . .
 
-RUN cd /app && npm run build
+RUN npm run build
 
-CMD ["cd", "/app", "&&", "npm", "run", "server"]
+CMD ["npm", "run", "server"]
