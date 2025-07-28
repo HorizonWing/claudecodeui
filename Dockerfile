@@ -39,9 +39,11 @@ WORKDIR /code
 
 EXPOSE 3008 3009
 
-COPY . .
+COPY package*.json ./
 
 RUN npm install
+
+COPY . .
 
 RUN npm run build
 
